@@ -1,22 +1,42 @@
-Welcome to Lumache's documentation!
-===================================
+# *🚅 litellm*
+[![](https://dcbadge.vercel.app/api/server/wuPM9dRgDw)](https://discord.gg/wuPM9dRgDw)
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+a simple & light 100 line package to call OpenAI, Azure, Cohere, Anthropic API Endpoints 
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+litellm manages:
+- translating inputs to completion and embedding endpoints
+- guarantees consistent output, text responses will always be available at `['choices'][0]['message']['content']`
+# usage
+* Code Sample: [Getting Started Notebook](https://colab.research.google.com/drive/1gR3pY-JzDZahzpVdbGBtrNGDBmzUNJaJ?usp=sharing)
+```python
+from litellm import completion
 
-.. note::
+## set ENV variables
+os.environ["OPENAI_API_KEY"] = "openai key"
+os.environ["COHERE_API_KEY"] = "cohere key"
 
-   This project is under active development.
+messages = [{ "content": "Hello, how are you?","role": "user"}]
 
-Contents
---------
+# openai call
+response = completion(model="gpt-3.5-turbo", messages=messages)
 
-.. toctree::
+# cohere call
+response = completion("command-nightly", messages)
 
-   usage
-   api
+# azure openai call
+response = completion("chatgpt-test", messages, azure=True)
+```
+
+# installation
+```
+pip install litellm
+```
+
+# hosted version
+- [Grab time if you want access 👋](https://calendly.com/d/4mp-gd3-k5k/berriai-1-1-onboarding-litellm-hosted-version)
+
+# why did I build this 
+- **Need for simplicity**: My code started to get extremely complicated managing & translating calls between Azure, OpenAI, Cohere
+
+# Support
+Contact us at ishaan@berri.ai / krrish@berri.ai
